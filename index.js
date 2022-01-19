@@ -19,6 +19,10 @@ function middleware(req,res,next){
 }
 
 app.use('/image',middleware,imageRoutes);
+app.all('*',(req,res)=> {
+    res.sendStatus(404);
+  });
+
 const PORT = process.env.PORT || 3000;
 
 
@@ -27,10 +31,4 @@ app.get('/ping',(req,res)=>{
 });
 
 
-
-mongoose.connect(process.env.CONNECTION_URL,{useNewUrlParser:true,useUnifiedTopology:true})
-    .then(()=>app.listen(PORT,()=>console.log("server is running")))
-    .catch((error)=>{
-        console.log(error.message);
-        process.exit();
-    });
+app.listen(PORT,()=>console.log("server is running"))
