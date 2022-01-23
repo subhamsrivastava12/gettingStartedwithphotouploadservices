@@ -1,6 +1,22 @@
 const {uploadImage} = require("../services/uploadImage");
 const {updateImage} = require("../services/updateImage");
 const {deleteImage} = require("../services/deleteImage");
+const {getImage} = require("../services/getImage")
+
+module.exports.getImage=async (req,res)=>{
+    const imageId=req.params.id;
+    getImage(imageId)
+    .then((data)=>{
+        console.log("data",data);
+        res.json(data);
+    })
+    .catch((err)=>{
+        res.status(500).send(err.message);
+    })
+    
+    
+}
+
 
 
 module.exports.uploadImage = async(req,res)=>{
